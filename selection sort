@@ -1,0 +1,32 @@
+#include<stdio.h>
+#include<conio.h>
+void main()
+{
+ int n,i,j,a[10],temp,t;
+ clrscr();
+ printf("\n Enter the size of the list");
+ scanf("%d",&n);
+ printf("\n Enter elements in the list:\n");
+ for(i=0;i<n;i++)
+ {
+  printf("\n Enter element %d\t",i+1);
+  scanf("%d",&a[i]);
+ }
+ for(i=0;i<n;i++)
+ {    t=i;
+  for(j=i+1;j<n;j++)
+  {
+   if(a[j]<a[t])
+     t=j;
+  }
+    temp=a[i];
+    a[i]=a[t];
+    a[t]=temp;
+  }
+  printf("\n Elements sorted in ascending order are:\n");
+  for(i=0;i<n;i++)
+  printf("%d\t",a[i]);
+  getch();
+  }
+
+
