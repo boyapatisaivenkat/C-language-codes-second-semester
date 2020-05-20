@@ -1,0 +1,265 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int info;
+    struct node *next;
+    struct node *prev;
+};
+
+void c();
+
+void getnode();
+
+void d();
+
+void ibe();
+
+void ie();
+
+void s();
+
+void ia();
+
+void ib();
+
+void de();
+
+void sum();
+
+struct node *start=NULL,*temp,*ptr,*l=NULL,*loc;
+
+void main() 
+{
+    int ch;
+    do
+    {
+        printf("\n------MENU------\n");
+        printf ("\n 1.Creataing a list\n 2.Getting a new node\n 3.Dispaying the list\n 4.inserting at begining\n 5.inserting at end\n 6.Searching a node\n 7.inserting after a number\n 8.inserting before a number\n 9.Deleting a number\n 10.Sum of a list\n 11.Exit\n ");
+      
+        printf("-------------------");
+        
+        printf ("\nEnter your choice");
+      
+        scanf ("%d", &ch);
+      
+        switch (ch)
+	
+	    {
+	
+        case 1: c();
+            break;
+            
+        case 2: getnode();
+            break;
+	
+        case 3: d();
+	        break;
+	
+        case 4: ibe();
+	        break;
+	
+        case 5: ie();
+            break;
+        
+        case 6: s();
+            break;
+        
+        case 7: ia(s);
+            break;
+        
+        case 8: ib();
+            break;
+        
+        case 9: de(s);
+            break;
+        
+        case 10: sum();
+            break;
+            
+        case 11: exit (0); 
+	        break;
+	
+        default:
+	  
+        printf ("Invalid choice entered by the user");
+	    }
+    
+    }while(1);
+
+}
+
+void c()
+{
+        start=NULL;
+        l=NULL;
+}
+
+void getnode()
+{
+    temp=(struct node*)malloc(sizeof(struct node));
+    printf("Enter the number");
+    scanf("%d",&temp->info);
+}
+
+
+void d()
+{
+    int n=1,x;
+    if(x==NULL)
+    {
+        printf("No list is found");
+    }
+    else
+    {
+        temp=x;
+        while(temp!=NULL)
+        {
+            printf("%d->",temp->info);
+            n++;
+            temp=temp->next;
+        }
+        printf("\n");
+    }
+    
+}
+
+void ibe()
+{
+    getnode();
+    if(temp == NULL)  
+   {  
+       printf("\nOVERFLOW");  
+   }  
+   else  
+   {  
+        if(start==NULL)  
+        {  
+            temp->next = NULL;  
+            temp->prev=NULL;  
+            start=temp;  
+        }  
+        else   
+        {  
+           temp->prev=NULL;  
+           temp->next = start;  
+           start->prev=temp;  
+           start=temp;  
+        }  
+        printf("\nNode inserted\n");  
+    }  
+}
+
+void ie()
+{
+    getnode();
+    if(temp == NULL)  
+   {  
+       printf("\nOVERFLOW");  
+   }  
+   else  
+   {  
+          
+       if(start == NULL)  
+       {  
+           temp->next = NULL;  
+           temp->prev = NULL;  
+           start = temp;  
+       }  
+       else  
+       {  
+          ptr = start;  
+          while(ptr->next!=NULL)  
+          {  
+              ptr = ptr->next;  
+          }  
+          ptr->next = temp;  
+          temp ->prev=temp;  
+          temp->next = NULL;  
+        }  
+    }
+    l=temp;
+    printf("\nnode inserted\n");  
+}
+
+
+void s()
+{
+    int ele,i=0;
+    ptr=start;
+    printf("Enter the number after which you want to insert or delete that number :%d ",ele);
+    scanf("%d",&ele);
+    while(ptr!=NULL)
+    {
+        i++;
+        if(ptr->info==ele)
+        {
+            loc=ptr;
+            break;
+        }
+        ptr=ptr->next;
+    }
+}
+
+void ia()
+{
+    s();
+    getnode();
+    temp->next=loc->next;
+    loc->next->prev=temp;
+    loc->next=temp;
+    temp->prev=loc;
+    d();
+}
+
+void ib()
+{
+    s();
+    getnode();
+    temp->prev=loc->prev;
+    loc->prev->next=temp;
+    loc->prev=temp;
+    temp->next=loc;
+    d();
+}
+
+
+
+void de()
+{
+    s();
+    if(loc==NULL)
+    {
+        printf("NO node to be deleted ");
+    }
+    else if(loc==start)
+    {
+        start=loc->prev;
+        loc->next->prev=NULL;
+        free(loc);
+    }
+    else if(loc==l)
+    {
+        l=loc->prev;
+        loc->prev->next=NULL;
+    }
+    else
+    {
+        loc->prev->next=loc->next;
+        loc->next->prev=loc->prev;
+    }
+    d();
+}
+
+void sum()
+{
+    int sum=0,m;
+    ptr=start;
+    while(ptr!=NULL)
+    {
+        m=ptr->info;
+        sum=sum+m;
+        ptr=ptr->next;
+    }
+    printf("The sum of the elements present in the data is %d",sum);
+}
