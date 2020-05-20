@@ -1,0 +1,365 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct node *next;
+};
+struct node *start;
+void A();
+void B();
+void C();
+void D();
+void E();
+void F();
+void G();
+void H();
+void I();
+void J();
+void K();
+void L();
+void main()
+{
+    int cho;
+    while(10)
+    {
+    printf("\n.......menu.......\n");
+    printf("1.create\n2.Display\n3.insert_beg\n4.insert_last\n5.insert element at give postion\n6.insert element after given element\n7.insert element before given element\n8.delete\n9.reverse\n10.Sum\n11.even_odd\n12.frequency of occurence of given number\n13.exit");
+    printf("\nEnter your choice");
+    scanf("%d",&cho);
+    switch(cho)
+    {
+        case 1:
+            A();
+            break;
+        case 2:
+            B();
+            break;
+        case 3:
+            C();
+            break;
+        case 4:
+            D();
+            break;
+        case 5:
+            E();
+            break;
+        case 6:
+            F();
+            break;
+        case 7:
+            G();
+            break;
+        case 8:
+            H();
+            break;
+        case 9:
+            I();
+            break;
+        case 10:
+            J();
+            break;
+        case 11:
+            K();
+            break;
+        case 12:
+            L();
+            break;
+        case 13:
+            exit(10);
+        default:
+            printf("\nchoose the above options");
+    }
+    }
+}
+void A()
+{
+    struct node *start=NULL;
+}
+void B()
+{
+    struct node *ptr;
+    if(start==NULL)
+    {
+        printf("list is empty");
+    }
+    else
+    {
+    ptr=start;
+    while(ptr!=NULL)
+    {
+        printf("%d",ptr->data);
+        ptr=ptr->next;
+    }
+    }
+}
+void C()
+{
+    struct node *link=(struct node *)malloc(sizeof(struct node));
+    printf("enter the data");
+    scanf("%d",&link->data);
+    link->next=start;
+    start=link;
+}
+
+void D()
+{
+    struct node *p,*link;
+    link=(struct node *)malloc(sizeof(struct node));
+    printf("Enter the data");
+    scanf("%d",&link->data);
+    p=start;
+    if(start==NULL)
+    {
+    start=link;
+    link->next=NULL;
+    }
+    else
+    {
+        while(p->next!=NULL)
+        {
+            p=p->next;
+        }
+        p->next=link;
+        link->next=NULL;
+    }
+}
+void E()
+{
+    struct node *link,*ptr,*pp;
+    int pos,i;
+    printf("At which postion you need to insert");
+    scanf("%d",&pos);
+    link=(struct node *)malloc(sizeof(struct node));
+    printf("Enter the data");
+    scanf("%d",&link->data);
+    if(pos==1)
+    {
+        link->next=start;
+        start=link;
+    }
+    else
+    {
+    ptr=start;
+    pp=NULL;
+    for(i=1;i<pos;i++)
+    {
+        pp=ptr;
+        ptr=ptr->next;    
+    }
+    pp->next=link;
+    link->next=ptr;
+    }
+}
+void F()
+{
+    struct node *ptr,*link,*pp,*p;
+    int ele,loc=-1,pos,count=0,i;
+    printf("At what after number you need to insert");
+    scanf("%d",&ele);
+    ptr=start;
+    while(ptr!=NULL)
+    {
+        if(ptr->data==ele)
+        {
+            loc=loc+1;
+            break;
+        }
+        count=count+1;
+        ptr=ptr->next;
+    }
+    pos=count+1;
+    if(loc==-1)
+    {
+        printf("The element is not found");
+    }
+    else
+    {
+        link=(struct node *)malloc(sizeof(struct node));
+        printf("Enter the data");
+        scanf("%d",&link->data);
+        p=start;
+        pp=NULL;
+        for(i=0;i<pos;i++)
+        {
+            pp=p;
+            p=p->next;
+        }
+        pp->next=link;
+        link->next=p;
+    }
+}
+void G()
+{
+    struct node *pp,*p,*link;
+    int ele,loc=-1,pos,i,count=0;
+    printf("At what before number you need to insert");
+    scanf("%d",&ele);
+    struct node *ptr=start;
+    while(ptr!=NULL)
+    {
+        if(ptr->data==ele)
+        {
+            loc=loc+1;
+            break;
+        }
+        count=count+1;
+        ptr=ptr->next;
+    }
+    pos=count+1;
+    link=(struct node *)malloc(sizeof(struct node));
+    printf("Enter the data");
+    scanf("%d",&link->data);
+    if(loc==-1)
+    {
+        printf("The element is not found");
+    }
+    else if(pos==1)
+    {
+        link->next=start;
+        start=link;
+    }
+    else
+    {
+        p=start;
+        pp=NULL;
+        for(i=1;i<pos;i++)
+        {
+            pp=p;
+            p=p->next;
+        }
+        pp->next=link;
+        link->next=p;
+    }
+}
+void H()
+{
+    struct node *link,*q,*ptr,*p,*pp;
+    int ele,loc=-1,pos,count=0,i;
+    printf("Which number you need to delete");
+    scanf("%d",&ele);
+    ptr=start;
+    while(ptr!=NULL)
+    {
+        if(ptr->data==ele)
+        {
+            loc=loc+1;
+            break;
+        }
+        count=count+1;
+        ptr=ptr->next;
+    }
+    pos=count+1;
+    if(loc==-1)
+    {
+        printf("The element is not found");
+    }
+    else if(pos==1)
+    {
+        q=start;
+        start=start->next;
+        free(q);
+    }
+    else
+    {
+        p=start;
+        pp=NULL;
+        for(i=1;i<pos;i++)
+        {
+            pp=p;
+            p=p->next;
+        }
+        pp->next=p->next;
+        free(p);
+    }
+}
+void I()
+{
+    struct node *ptr,*s,*e;
+    int length=0,i,j,k,temp;
+    ptr=start;
+    while(ptr!=NULL)
+    {
+        length=length+1;
+        ptr=ptr->next;
+    }
+    s=e=start;
+    i=0;
+    j=length-1;
+    while(i<j)
+    {
+        k=0;
+        while(k<j)
+        {
+            e=e->next;
+            k=k+1;
+        }
+        temp=s->data;
+        s->data=e->data;
+        e->data=temp;
+        i=i+1;
+        j=j-1;
+        s=s->next;
+        e=start;
+    }
+}
+void J()
+{
+    int sum=0;
+    struct node *ptr=start;
+    while(ptr!=NULL)
+    {
+        sum=sum+(ptr->data);
+        ptr=ptr->next;
+    }
+    printf("The sum is %d",sum);
+}
+void K()
+{
+    int loc=-1,pos=-1;
+    struct node *ptr=start,*p=start;
+    printf("Even numbers\n");
+    while(ptr!=NULL)
+    {
+        if((ptr->data)%2==0)
+        {
+            loc=loc+1;
+            printf("%d\n",ptr->data);
+        }
+        ptr=ptr->next;
+    }
+    if(loc==-1)
+    {
+        printf("There are no even numbers");
+    }
+    printf("Odd numbers\n");
+    while(p!=NULL)
+    {
+        if((p->data%2)!=0)
+        {
+            pos=pos+1;
+            printf("%d\n",p->data);
+        }
+        p=p->next;
+    }
+    if(pos==-1)
+    {
+        printf("There are no odd numbers");
+    }
+}
+void L()
+{
+    int count=0,ele;
+    printf("Enter the number");
+    scanf("%d",&ele);
+    struct node *ptr=start;
+    while(ptr!=NULL)
+    {
+        if(ptr->data==ele)
+        {
+            count=count+1;
+        }
+        ptr=ptr->next;
+    }
+    printf("The frequency of occurence of %d in the list is %d",ele,count);
+}
