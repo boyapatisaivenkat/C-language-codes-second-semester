@@ -1,0 +1,30 @@
+#include <stdio.h>
+
+int main()
+{
+    int marks1,marks2,marks3,marks4,marks5,average;
+    printf("enter the marks abtained in the 5 subjects : ");
+    scanf("%d%d%d%d%d",&marks1,&marks2,&marks3,&marks4,&marks5);
+    
+    average=(marks1+marks2+marks3+marks4+marks5)*100/500;
+    
+    if(average>=60)
+    printf("first division");
+    
+    else if(average<=50 && average>=59)
+    printf("second division");
+    
+    else if(average<=40 && average>=49)
+    printf("third division");
+    
+    else if(average<=40)
+    printf("fail division");
+    
+    
+    
+    
+    
+
+    return 0;
+}
+
