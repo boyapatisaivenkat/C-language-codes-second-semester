@@ -1,0 +1,106 @@
+#include<stdio.h>
+#define Size 20
+int Stack[Size],Top,n,Maxstack=Size-1;
+void create();
+void insert();
+void delete();
+void display();
+int main()
+{
+    int choice;
+    Top=-1;
+    printf("\n Enter the size of STACK:");
+    scanf("%d",&n);
+
+  do
+ {
+     int choice;
+     printf("Enter your choice");
+     scanf("%d",&choice);
+  switch(choice)
+  {
+      case 1:
+      {
+          create();
+          break;
+      }
+      case 2:
+      {
+          insert();
+          break;
+      }
+      case 3:
+      {
+          delete();
+          break;
+      }
+      case 4:
+      {
+          display();
+          break;
+      }
+      case 5:
+      {
+          printf("out of your choice");
+      }
+      default:
+      {
+          printf("Not found");
+      }
+  }
+ }
+ while(choice!=5);
+ 
+ }
+void create()
+ {
+     int a;
+    Top=-1;
+ }
+void insert()
+ {
+     int a;
+     if(Top>=Maxstack)
+     {
+         printf("stack was ready to over flow ");
+     }
+    else
+    {
+        printf("enter an element to insert in it\n");
+        scanf("%d",&a);
+        Top=Top+1;
+        Stack[Top]=a;
+    }
+ }
+void delete()
+{
+    int a;
+    if(Top==-1)
+     {
+        printf("stack was underflowing");
+     }
+     else
+     {
+        a=Stack[Top];
+        Top=Top-1;
+        printf("the deleted element which must be deleted: %d\n",a);
+     }
+}
+void display()
+{
+    int a;
+    if(Top==-1)
+    {
+        printf("stack was empty");
+        
+    }
+    else
+    {
+        printf("stack elements are \n");
+        for(a=Top;a>=0;a--)
+        {
+            printf("%d",Stack[a]);
+        }
+        
+    }
+}
