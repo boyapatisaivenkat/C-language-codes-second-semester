@@ -1,0 +1,197 @@
+#include <stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+int a[100],a[100],b[100],i,j,k,n,element ;
+void create();
+void display();
+void Bubble_sort (int a[], int n);
+void selection_sort(int a[], int n);
+void insertion_sort(int a[], int n);
+void merge_sort(int a[], int n);
+
+
+void main()
+{
+    int cho;
+    do
+    {
+        printf("\n.....Menu driven C Program....\n");
+        printf("\n 1. Create an integer array\n 2. Display the contents of the arrays\n 3. Insertion sort\n 4.Selection sort\n 5.Bubble sort\n 6.Merge sort\n 7. exit\n");
+        printf("Enter your choice");
+        scanf("%d", &cho);
+        switch (cho)
+        {
+            case 1: create();
+                break;
+         
+            case 2: display();
+                break;
+           
+            case 3: insertion_sort(a, n);
+                break;
+
+            case 4: selection_sort(a, n);
+                break;
+               
+            case 5 : Bubble_sort( a, n);
+                break;
+               
+            case 6: printf("After merge sort. Array is : \n");
+                    for(i=0 ; i<n ; i++)
+                    {
+                        printf("%d\t" , a[i]);
+                    }
+                    merge_sort(a, n);
+                    break;
+               
+            case 7: exit(0);
+                  break;
+                 
+            default : printf("Enter a valid integer");
+        }
+    }while(1);
+}
+
+void create()
+{
+    printf("Enter the value of n ");
+    scanf("%d",&n);
+    printf("Enter the values in the array\n");
+    for(i=0;i<n;i++)
+    {
+        scanf("%d",&a[i]);
+    }
+}
+
+void display()
+{
+   
+
+    printf("The given array is  \n");
+    for(i = 0 ; i < n ; i++)
+    {
+        printf("%d\t",a[i]);
+    }
+   
+}
+
+void Bubble_sort(int a[], int n)
+{
+    int temp;
+    for(i = 0 ; i<n-1 ; i++)
+    {
+        for(j = 0 ; j < n-1 ; j++)
+        {
+            if(a[j] > a[j+1])
+            {
+                temp = a[j];
+                a[j] = a[j+1];
+                a[j+1] = temp ;
+            }
+        }
+    }
+    printf("After Bubble sort. Array is : \n ");
+    for(i=0;i<n;i++)
+    {
+        printf("%d \t ", a[i]);
+    }
+}
+
+
+void selection_sort(int a[], int n)
+{
+    int min, temp;
+   
+    for(i = 0 ; i<n-1; i++)
+    {
+        min = i;
+        for(j = i+1 ; j<n; j++)
+        {
+            if(a[j]<a[min])
+            {
+                min = j;
+            }
+        }
+        if(min != i)
+        {
+            temp = a[i];
+            a[i] = a[min];
+            a[min] = temp;
+        }
+    }
+    printf("After selection sort. Array is : \n ");
+    for(i= 0 ; i<n ; i++)
+    {
+        printf("%d\t ", a[i]);
+    }
+}
+
+
+void insertion_sort(int a[], int n)
+{
+    int temp;
+    for(i=1;i<n;i++)
+    {
+        temp = a[i];
+        j = i -1;
+    while(j>=0 && a[j]>temp)
+    {
+        a[j+1] = a[j];
+        j = j-1;
+    }
+    a[j+1] = temp;
+    }
+    printf("After insertion sort. Array is :\n");
+    for(i = 0 ; i<n ; i++)
+    {
+        printf("%d\t" , a[i]);
+    }
+}
+
+void merge_sort(int a[] , int n)
+{
+    int Low_bound, up_bound, mid;
+    i = Low_bound;
+    j = mid + 1;
+    k = Low_bound;
+    while(i<=mid && j<= up_bound)
+    {
+        if(a[i]<=a[j])
+        {
+            b[k] = a[i];  
+            i++;
+        }
+        else
+        {
+            b[k] = a[j];
+            j++;
+        }
+        k++;
+    }
+    if(i>mid)
+    {
+        while(j<=up_bound)
+        {
+            b[k]=a[j];
+            j++;
+            k++;
+           
+        }
+    }
+    else
+    {
+        while(j<= mid)
+        {
+            b[k] = a[i];
+            i++;
+            k++;
+        }
+    }
+    for(k = Low_bound ; k<=up_bound ; k++)
+    {
+        a[k] = b[k];
+    }
+}  
+
+
+
