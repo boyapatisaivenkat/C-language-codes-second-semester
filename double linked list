@@ -1,0 +1,162 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define init() ((struct node*)malloc(sizeof(struct node)))
+typedef struct node
+{
+	int data;
+	struct node *next;
+	struct node *prev;
+}node;
+
+node* createNode(int data){
+	node *newNode = init();
+	newNode->data = data;
+	newNode->next = NULL;
+	newNode->prev = NULL;
+	return newNode;
+}
+
+void Display(node *head){
+	while(head != NULL){
+		printf("%d\n",head->data);
+		head = head->next;
+	}
+
+}
+node* insertBeg(node *head, int data){
+	node *tmp = createNode(data);
+	if(head == NULL) return tmp;
+	head->prev = tmp;
+	tmp->next = head;
+	return tmp;
+}
+
+node* insertEnd(node *head, int data){
+	node *tmp,*ptr = head;
+	tmp = createNode(data);
+	if(ptr == NULL)return tmp;
+	while(ptr->next != NULL) ptr = ptr->next;
+	tmp->prev = ptr; 
+	ptr->next = tmp;
+	return head;
+}
+
+node* insertAftNum(node *head, int data, int num){
+	node *tmp,*ptr = head;
+	tmp = createNode(data);
+	while(ptr != NULL){
+		if(ptr->data == num){
+			node *tmp2 = ptr->next;
+			tmp->prev = ptr;
+			ptr->next = tmp;
+			tmp->next = tmp2;
+			if(tmp2 != NULL)tmp2->prev = tmp;
+		}
+		ptr = ptr->next;
+	}
+	return head;
+}
+node* insertBefNum(node *head, int data, int num){
+	node *tmp,*ptr = head;
+	tmp = createNode(data);
+	while(ptr!= NULL){
+		if(ptr->data == num){
+			node *tmp2 = ptr->prev;
+			tmp->prev = tmp2;
+			ptr->prev = tmp;
+			tmp->next = ptr;
+			if(tmp2!= NULL){
+				tmp2->next = tmp;
+				return head;
+			}
+			return tmp;
+		}
+		ptr = ptr->next;
+	}
+	return head;
+}
+node* delete(node *head, int num){
+	node* ptr = head, *pre= NULL;
+	if(ptr == NULL) return ptr;
+	if(ptr->data == num) return ptr->next;
+	while(ptr != NULL){
+		if(ptr->data == num){
+			printf("%d is deleted\n",ptr->data);
+			node *tmp = ptr->next;
+			pre->next = tmp;
+			if(tmp != NULL) tmp->prev = pre;
+			break;
+		}
+		pre = ptr;
+		ptr = ptr->next;
+	}
+	return head;
+}
+int sum(node *head){
+	int s = 0;
+	while(head != NULL){
+		s += head->data;
+		head = head->next;
+	}
+	return s;
+}
+int main ()  {  
+	int choice,data,num ;
+	node *head ;
+	    while(1){  
+	        
+	        printf("\nChoose one option from the following list ...\n");  
+	         
+	        printf("\n1.create \n2.Insert in begining\n3.Insert at last\n4.Insert after a number \n5insertion before a number .\n6.Delete num \n7.sum\n8.Display\n9.Exit\n");  
+	        printf("\nEnter your choice?\n");  
+	        scanf("\n%d",&choice);  
+	        switch(choice){  
+	            case 1: printf("created node\n");break; 
+	            case 2:{
+	            	printf("Enter the data to be inserted\n");
+	            	scanf("%d",&data);
+	            	head = insertBeg(head, data);
+	            	break;
+	            }
+	            case 3:{
+	            	printf("Enter the data to be inserted\n");
+	            	scanf("%d",&data);
+	            	head = insertEnd(head, data);
+	            	break;
+	            }
+	            case 4:{
+	            	printf("Enter the Num\n");
+	            	scanf("%d",&num);
+	            	printf("Enter the data to be inserted\n");
+	            	scanf("%d",&data);
+	            	head = insertAftNum(head, data, num);
+	            	break;
+	            }
+	            case 5:{
+	            	printf("Enter the Num\n");
+	            	scanf("%d",&num);
+	            	printf("Enter the data to be inserted\n");
+	            	scanf("%d",&data);
+	            	head = insertBefNum(head, data, num);
+	            	break;
+	            }
+	            case 6:{
+	            	printf("Enter the Num\n");
+	            	scanf("%d",&num);
+	            	head = delete(head, num);
+	            	break;
+	            }
+	            case 7:{
+	            	printf("%d is the sum\n", sum(head));
+	            } 
+	           	case 8:{
+	           		printf("The list:\n");
+	           		Display(head);
+	           		break;
+
+	           	}
+	            case 9: {exit(0);break;}
+	        }  
+	    }
+	return 0; 
+}
